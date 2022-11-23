@@ -13,5 +13,7 @@ namespace Exercise3
         public string name;
         public Node next;
     }
+    class Circularlist
+    { }
 }
 
