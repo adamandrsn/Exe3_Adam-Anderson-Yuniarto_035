@@ -23,18 +23,16 @@ namespace Exercise3
         {
             LAST = null;
         }
-        
-        public bool Search(int rollNo, ref Node previous, ref Node current)/*Searches for the specified node*/
+
+        public bool Search(int rollNo, ref Node previous, ref Node current)
         {
-            for (previous = current = LAST.next; current != LAST; previous = current, current = current.next)
-            {
-                if (rollNo == current.rollNumber)
-                    return (true);/*returns true if the node is found*/
-            }
-            if (rollNo == LAST.rollNumber)/*If the node is present at the end*/
-                return true;
-            else
-                return (false);/*returns false if the node is not found*/
+            for (previous = current = LAST; current != null &&
+                rollNo != current.rollNumber; previous = current,
+                current = current.next)
+            { }
+            /*The above for loop traverses the list. If the specified node
+             * is found then the function returns true, otherwise false.*/
+            return (current != null);
         }
         public bool listEmpty()
         {
@@ -45,21 +43,20 @@ namespace Exercise3
         }
 
 
-        public void traverse()/*Traverses all the nodes of the list*/
+        public void traverse()/*Traverse the list*/
         {
+
             if (listEmpty())
                 Console.WriteLine("\nList is empty");
             else
             {
-                Console.WriteLine("\nRecords in the list are:\n");
+                Console.WriteLine("\nRecords in the ascending order of " +
+                    "roll numbers are:\n");
                 Node currentNode;
-                currentNode = LAST.next;
-                while (currentNode != LAST)
-                {
-                    Console.Write(currentNode.rollNumber + "     " + currentNode.name + "\n");
-                    currentNode = currentNode.next;
-                }
-                Console.Write(LAST.rollNumber + "     " + LAST.name + "\n");
+                for (currentNode = LAST; currentNode != null;
+                    currentNode = currentNode.next)
+                    Console.Write(currentNode.rollNumber + "   "
+                        + currentNode.name + "\n");
             }
         }
         public void firstNode()
